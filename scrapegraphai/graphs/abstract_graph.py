@@ -155,6 +155,10 @@ class AbstractGraph(ABC):
 
         if "gpt-" in llm_params["model"]:
             return handle_model(llm_params["model"], "openai", llm_params["model"])
+        
+        if "moonshot-" in llm_params["model"]:
+            model_name = llm_params["model"].split("/")[-1]
+            return handle_model(model_name, "openai", model_name)
 
         if "fireworks" in llm_params["model"]:
             model_name = "/".join(llm_params["model"].split("/")[1:])
